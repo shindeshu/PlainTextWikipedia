@@ -3,6 +3,7 @@ import json
 import re
 from html2text import html2text as htt
 import wikitextparser as wtp
+import os
 
 
 def dewiki(text):
@@ -37,8 +38,8 @@ def save_article(article, savedir):
     doc = analyze_chunk(article)
     if doc:
         print('SAVING:', doc['title'])
-        filename = doc['id'] + '.json'
-        with open(savedir + filename, 'w', encoding='utf-8') as outfile:
+        filename = os.path.join(savedir, doc['id'] + '.json')
+        with open(filename, 'w', encoding='utf-8') as outfile:
             json.dump(doc, outfile, sort_keys=True, indent=1, ensure_ascii=False)
 
 
